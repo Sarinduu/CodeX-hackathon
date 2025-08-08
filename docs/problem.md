@@ -1,83 +1,71 @@
-# QueueLess – Problem Statement
+# GovSign – Problem Statement
 
-## 1. Context & Pain Point
+### **1. Context & Pain Point**
 
-In Sri Lanka, many government processes such as vehicle registration, land transfers, business licensing, and permit applications require citizens to visit **multiple counters or sections** within one or more offices.  
-These processes must be completed in a specific sequence, but citizens often do not know:
-- The **correct order of steps**
-- Which **sections are open** on a given day
-- The **current queue length** at each section
-- Whether they can **finish the process before closing time**
-- Which **documents** are needed at each step
+In Sri Lanka, many government-related tasks require **multiple official signatures** before they can be completed. These signatures must often be obtained in person from specific officers, such as:
 
-Existing booking systems only allow citizens to schedule **a single appointment for one service**. They do not provide real-time information about **multi-step processes** or **live office conditions**.
+- **Justice of the Peace (Sama Wenisuru)**
+- **Grama Niladhari (Village Officer)**
+- **Provincial Administrative Authority (Palath Palana Ayathana)**
+- **Divisional Secretary (Pradeshiya Lekam)**
 
----
+This process applies to a wide range of activities:
+- Registering a business
+- Applying for national identity cards
+- Registering property or a house
+- Participating in tenders
+- Applying for loans, and more
 
-## 2. Real-World Impact
-
-The lack of a process-aware, real-time system leads to:
-- **Wasted trips** – Citizens travel to offices only to discover a required section is closed or overloaded.
-- **Lost time & income** – Each wasted day can mean lost wages, travel expenses, and frustration.
-- **Overcrowding** – Citizens arrive at peak times without knowing wait times, causing congestion.
-- **Process delays** – Missing documents or wrong counter visits force restarts.
-- **Reduced trust** – Citizens perceive government services as slow and inefficient.
+The **pain point** is that citizens must physically travel to different offices — sometimes multiple times — just to collect these signatures, which is slow, inconvenient, and inefficient.
 
 ---
 
-## 3. Evidence & Scenarios
+### **2. Real-World Impact**
 
-**Scenario 1 – Vehicle Registration at RMV**
-A citizen needs to:
-1. Pay taxes at the finance section
-2. Verify documents at the registration section
-3. Get number plates at another counter  
-If step 2 is closed or the queue is too long, the citizen cannot complete the process that day, wasting time and travel.
-
-**Scenario 2 – Land Transfer at Divisional Secretariat**
-A land transfer requires:
-- Document submission
-- Legal verification
-- Payment of fees
-- Final approval  
-Missing one step means returning another day, with no clear guidance on optimal timing.
-
-Public complaints and news reports highlight **long queues** and **multiple visits** as common pain points in RMV offices, passport centers, hospitals, and local government buildings.
+- **Time Wasted:** People spend days or even weeks visiting different government offices.  
+- **Travel Costs:** Citizens must pay for transport to reach various locations.  
+- **Loss of Productivity:** People often take leave from work to stand in queues or wait for officials to be available.  
+- **Delayed Services:** Government workflows are slowed down because documents take longer to pass through the required signatories.  
 
 ---
 
-## 4. Scope of the Problem
+### **3. Evidence & Scenarios**
 
-This problem affects:
-- **All government offices with multiple service counters**
-- Citizens applying for or renewing official documents
-- Processes that require **multiple sequential steps** in different physical locations
-
-The inefficiency is **nationwide**, affecting thousands daily, particularly in urban centers and high-demand service offices.
+- **Example 1:** A small business owner must get approvals from four different officers to register their business, each in a different location. This takes over two weeks.  
+- **Example 2:** A citizen applying for a housing loan must first get property documents signed by the village officer and divisional secretary, causing repeated visits and long delays.  
+- **Example 3:** During peak periods (e.g., election time, budget allocation), officials are busier than usual, leading to longer queues and rescheduling.  
 
 ---
 
-## 5. Why This Needs Solving
+### **4. Scope of the Problem**
 
-Citizens need a **single platform** that:
-- Lets them check if a process can be completed **today** based on real-time office data
-- Shows all required steps in the **correct order**
-- Displays **queue lengths and wait times** for each section
-- Provides **document checklists** to avoid missing requirements
-- Allows **in-process payments** without extra counters
-
-For government:
-- Enables **better crowd management**
-- Provides **data-driven insights** into service demand
-- Improves **public trust** in digital governance
+- **Nationwide Issue:** Affects citizens in all districts, from rural to urban areas.  
+- **Multiple Sectors:** Business registration, housing, land ownership, tenders, social welfare, banking, education, and more.  
+- **All Demographics:** From entrepreneurs to farmers, students to retirees, everyone faces this at some point.  
 
 ---
 
-## 6. Opportunity
+### **5. Why This Needs Solving**
 
-A **DPI-powered solution** can connect:
-- **SLUDI** for secure citizen login
-- **NDX** for real-time office and process data
-- **PayDPI** for integrated payments
+- Reduces **public frustration** with government services.  
+- Increases **efficiency** in government operations.  
+- Minimizes **travel and waiting time** for citizens.  
+- Prevents economic loss due to time away from work.  
+- Supports **digital transformation goals** for Sri Lanka’s public sector.  
 
-This would eliminate wasted visits, improve efficiency, and make service delivery more citizen-friendly, aligning with Sri Lanka’s **Digital Economy Blueprint** and e-Government initiatives.
+---
+
+### **6. Opportunity**
+
+There is a **clear opportunity** to introduce a **digital or remote verification/signature system** that allows officials to approve and sign documents electronically.
+
+- This would **save time** for both citizens and government officers.  
+- It would **streamline workflows** and reduce paperwork.  
+- It would improve **service delivery speed** and **citizen satisfaction**.  
+
+---
+
+### **Summary Sentence**
+
+In Sri Lanka, the current signature collection process for government services is slow, manual, and location-bound, causing significant delays, costs, and frustration — a problem that can be transformed into a faster, more efficient system through digital innovation.
+
