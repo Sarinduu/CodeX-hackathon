@@ -1,0 +1,85 @@
+{
+  "officers": {
+    "900000001V": {
+      "nic": "900000001V",
+      "officeId": "GN-001",
+      "name": "K. Perera",
+      "designation": "Grama Niladhari",
+      "phone": "0711111111",
+      "email": "k.perera@gn.gov.lk",
+      "signatureFileId": null
+    },
+    "900000002V": {
+      "nic": "900000002V",
+      "officeId": "GN-002",
+      "name": "T. Jayasinghe",
+      "designation": "Grama Niladhari",
+      "phone": "0712222222",
+      "email": "t.jayasinghe@gn.gov.lk",
+      "signatureFileId": null
+    },
+    "900000101V": {
+      "nic": "900000101V",
+      "officeId": "DS-01",
+      "name": "S. Fernando",
+      "designation": "Divisional Secretary",
+      "phone": "0713333333",
+      "email": "s.fernando@ds.gov.lk",
+      "signatureFileId": null
+    },
+    "900000102V": {
+      "nic": "900000102V",
+      "officeId": "DS-DAM",
+      "name": "D. Herath",
+      "designation": "Divisional Secretary",
+      "phone": "0714444444",
+      "email": "d.herath@ds.gov.lk",
+      "signatureFileId": null
+    },
+    "900000201V": {
+      "nic": "900000201V",
+      "officeId": "DIST-COLOMBO",
+      "name": "R. Jayasuriya",
+      "designation": "District Secretary",
+      "phone": "0715555555",
+      "email": "r.jayasuriya@dist.gov.lk",
+      "signatureFileId": null
+    },
+    "900000202V": {
+      "nic": "900000202V",
+      "officeId": "DIST-MATALE",
+      "name": "M. Abeykoon",
+      "designation": "District Secretary",
+      "phone": "0716666666",
+      "email": "m.abeykoon@dist.gov.lk",
+      "signatureFileId": null
+    },
+    "900000301V": {
+      "nic": "900000301V",
+      "officeId": "PROV-WESTERN",
+      "name": "P. Senanayake",
+      "designation": "Provincial Officer",
+      "phone": "0717777777",
+      "email": "p.senanayake@prov.gov.lk",
+      "signatureFileId": null
+    },
+    "900000302V": {
+      "nic": "900000302V",
+      "officeId": "PROV-CENTRAL",
+      "name": "T. Gunasekara",
+      "designation": "Provincial Officer",
+      "phone": "0718888888",
+      "email": "t.gunasekara@prov.gov.lk",
+      "signatureFileId": null
+    },
+    "900000999V": {
+      "nic": "900000999V",
+      "officeId": "MIN-HOME",
+      "name": "W. Abeysinghe",
+      "designation": "Ministry Officer",
+      "phone": "0719999999",
+      "email": "w.abeysinghe@min.gov.lk",
+      "signatureFileId": null
+    }
+  }
+}
