@@ -175,6 +175,40 @@ Admin endpoint to seed or modify citizen and officer records.
 
 ---
 
+### **5.2 POST /admin/offices/upsert**
+Admin endpoint to add or update office information.
+
+**Request**
+```json
+{
+  "id": "GN-001",
+  "name": "Grama Niladhari Office - Udawela",
+  "division": "Kolonnawa",
+  "gnName": "K. Perera",
+  "signatureFileId": null
+}
+```
+
+**Response**
+```json
+{
+  "ok": true,
+  "office": {
+    "id": "GN-001",
+    "name": "Grama Niladhari Office - Udawela",
+    "division": "Kolonnawa",
+    "gnName": "K. Perera",
+    "signatureFileId": null
+  }
+}
+```
+
+**Status Codes**
+- `200 OK` – Office data successfully added or updated
+- `400 Bad Request` – Missing required fields or invalid data
+
+---
+
 ## Notes
 - **CITIZEN** can authenticate using NIC and fingerprint, and has the ability to create an account and login using a password.
 - **OFFICER** can authenticate using NIC and fingerprint, and can perform actions based on their jurisdiction (GN, DIVSEC, DISTSEC, PROVINCIAL, MINISTRY).
