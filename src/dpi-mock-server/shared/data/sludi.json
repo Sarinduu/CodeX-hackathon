@@ -1,0 +1,279 @@
+{
+  "sessions": {
+    "421dea41-a5f3-49ad-a8da-e18a80d1c0a3": {
+      "nic": "200012345678",
+      "type": "NIC",
+      "status": "AUTHENTICATED",
+      "challenge": "df5bf2",
+      "identity": {
+        "actor": "CITIZEN"
+      },
+      "deviceId": "pc-001",
+      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDAwMTIzNDU2NzgiLCJhY3RvciI6IkNJVElaRU4iLCJvZmZpY2VyVHlwZSI6bnVsbCwib2ZmaWNlSWQiOm51bGwsImp1cmlzZGljdGlvbiI6eyJ2aWxsYWdlcyI6W10sImRpdmlzaW9ucyI6W10sImRpc3RyaWN0cyI6W10sInByb3ZpbmNlcyI6W10sImNvdW50cnkiOmZhbHNlfSwidHlwIjoiTklDIiwic2NvcGVzIjpbImNpdGl6ZW46cmVhZDpzZWxmIiwiY2l0aXplbjp3cml0ZTpzZWxmIl0sImlhdCI6MTc1NDczNzk2NywiZXhwIjoxNzU0ODI3OTY3fQ.C2mtT69inyo5bbNjS61lSkRzU3lAF2j2UmtrhcnyVlU",
+      "expiresIn": 90000
+    },
+    "237d7c4b-e47a-436c-a468-710bcbd60871": {
+      "nic": "901234567V",
+      "type": "NIC",
+      "status": "NIC_VALIDATED",
+      "challenge": "fbe57f",
+      "identity": {
+        "actor": "CITIZEN"
+      }
+    },
+    "abcc8d42-bc1e-4980-8bdf-d0c645ea9fd3": {
+      "nic": "900000001V",
+      "type": "NIC",
+      "status": "AUTHENTICATED",
+      "challenge": "59d845",
+      "identity": {
+        "actor": "OFFICER",
+        "officerType": "GN",
+        "officeId": "GN-001",
+        "jurisdiction": {
+          "villages": [
+            "Udawela",
+            "Ihala"
+          ],
+          "divisions": [],
+          "districts": [],
+          "provinces": [],
+          "country": false
+        }
+      },
+      "deviceId": "pc-002",
+      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5MDAwMDAwMDFWIiwiYWN0b3IiOiJPRkZJQ0VSIiwib2ZmaWNlclR5cGUiOiJHTiIsIm9mZmljZUlkIjoiR04tMDAxIiwianVyaXNkaWN0aW9uIjp7InZpbGxhZ2VzIjpbIlVkYXdlbGEiLCJJaGFsYSJdLCJkaXZpc2lvbnMiOltdLCJkaXN0cmljdHMiOltdLCJwcm92aW5jZXMiOltdLCJjb3VudHJ5IjpmYWxzZX0sInR5cCI6Ik5JQyIsInNjb3BlcyI6WyJjaXRpemVuOnJlYWQ6dmlsbGFnZXMiLCJjaXRpemVuOndyaXRlOnZpbGxhZ2VzIiwicHJvY2VzczphcHByb3ZlOnZpbGxhZ2VzIiwicHJvY2VzczpzaWduIl0sImlhdCI6MTc1NDczODU0NiwiZXhwIjoxNzU0ODI4NTQ2fQ.Fl9fzZrc8jnSaJTzyjQzjw0XMBD2U9VU07GQ8bWD2Gw",
+      "expiresIn": 90000
+    }
+  },
+  "offices": {
+    "GN-001": {
+      "id": "GN-001",
+      "name": "Grama Niladhari Office - Udawela",
+      "division": "Kolonnawa",
+      "gnName": "K. Perera",
+      "signatureFileId": null
+    },
+    "GN-002": {
+      "id": "GN-002",
+      "name": "Grama Niladhari Office - Kottegoda",
+      "division": "Lakshapathiya",
+      "gnName": "T. Jayasinghe",
+      "signatureFileId": null
+    },
+    "GN-003": {
+      "id": "GN-003",
+      "name": "Grama Niladhari Office - Galewela",
+      "division": "Dambulla",
+      "gnName": "R. Fernando",
+      "signatureFileId": null
+    },
+    "DS-01": {
+      "id": "DS-01",
+      "name": "Divisional Secretariat - Kolonnawa",
+      "division": "Kolonnawa",
+      "gnName": null,
+      "signatureFileId": null
+    },
+    "DS-DAM": {
+      "id": "DS-DAM",
+      "name": "Divisional Secretariat - Dambulla",
+      "division": "Dambulla",
+      "gnName": null,
+      "signatureFileId": null
+    },
+    "DIST-COLOMBO": {
+      "id": "DIST-COLOMBO",
+      "name": "District Secretariat - Colombo",
+      "division": "Colombo",
+      "gnName": null,
+      "signatureFileId": null
+    },
+    "DIST-MATALE": {
+      "id": "DIST-MATALE",
+      "name": "District Secretariat - Matale",
+      "division": "Matale",
+      "gnName": null,
+      "signatureFileId": null
+    },
+    "PROV-WESTERN": {
+      "id": "PROV-WESTERN",
+      "name": "Provincial Council - Western",
+      "division": "Western",
+      "gnName": null,
+      "signatureFileId": null
+    },
+    "PROV-CENTRAL": {
+      "id": "PROV-CENTRAL",
+      "name": "Provincial Council - Central",
+      "division": "Central",
+      "gnName": null,
+      "signatureFileId": null
+    },
+    "MIN-HOME": {
+      "id": "MIN-HOME",
+      "name": "Ministry of Home Affairs",
+      "division": "National",
+      "gnName": null,
+      "signatureFileId": null
+    }
+  },
+  "registry": {
+    "200012345678": {
+      "actor": "CITIZEN"
+    },
+    "200134567890": {
+      "actor": "CITIZEN"
+    },
+    "200256789012": {
+      "actor": "CITIZEN"
+    },
+    "200367890123": {
+      "actor": "CITIZEN"
+    },
+    "200478901234": {
+      "actor": "CITIZEN"
+    },
+    "200589012345": {
+      "actor": "CITIZEN"
+    },
+    "811234567V": {
+      "actor": "CITIZEN"
+    },
+    "771112233V": {
+      "actor": "CITIZEN"
+    },
+    "921234567V": {
+      "actor": "CITIZEN"
+    },
+    "991234567V": {
+      "actor": "CITIZEN"
+    },
+    "900000001V": {
+      "actor": "OFFICER",
+      "officerType": "GN",
+      "officeId": "GN-001",
+      "jurisdiction": {
+        "villages": [
+          "Udawela",
+          "Ihala"
+        ],
+        "divisions": [],
+        "districts": [],
+        "provinces": [],
+        "country": false
+      }
+    },
+    "900000002V": {
+      "actor": "OFFICER",
+      "officerType": "GN",
+      "officeId": "GN-002",
+      "jurisdiction": {
+        "villages": [
+          "Kottegoda",
+          "Pahala"
+        ],
+        "divisions": [],
+        "districts": [],
+        "provinces": [],
+        "country": false
+      }
+    },
+    "900000101V": {
+      "actor": "OFFICER",
+      "officerType": "DIVSEC",
+      "officeId": "DS-01",
+      "jurisdiction": {
+        "villages": [],
+        "divisions": [
+          "Kolonnawa"
+        ],
+        "districts": [],
+        "provinces": [],
+        "country": false
+      }
+    },
+    "900000102V": {
+      "actor": "OFFICER",
+      "officerType": "DIVSEC",
+      "officeId": "DS-DAM",
+      "jurisdiction": {
+        "villages": [],
+        "divisions": [
+          "Dambulla"
+        ],
+        "districts": [],
+        "provinces": [],
+        "country": false
+      }
+    },
+    "900000201V": {
+      "actor": "OFFICER",
+      "officerType": "DISTSEC",
+      "officeId": "DIST-COLOMBO",
+      "jurisdiction": {
+        "villages": [],
+        "divisions": [],
+        "districts": [
+          "Colombo"
+        ],
+        "provinces": [],
+        "country": false
+      }
+    },
+    "900000202V": {
+      "actor": "OFFICER",
+      "officerType": "DISTSEC",
+      "officeId": "DIST-MATALE",
+      "jurisdiction": {
+        "villages": [],
+        "divisions": [],
+        "districts": [
+          "Matale"
+        ],
+        "provinces": [],
+        "country": false
+      }
+    },
+    "900000301V": {
+      "actor": "OFFICER",
+      "officerType": "PROVINCIAL",
+      "officeId": "PROV-WESTERN",
+      "jurisdiction": {
+        "villages": [],
+        "divisions": [],
+        "districts": [],
+        "provinces": [
+          "Western"
+        ],
+        "country": false
+      }
+    },
+    "900000302V": {
+      "actor": "OFFICER",
+      "officerType": "PROVINCIAL",
+      "officeId": "PROV-CENTRAL",
+      "jurisdiction": {
+        "villages": [],
+        "divisions": [],
+        "districts": [],
+        "provinces": [
+          "Central"
+        ],
+        "country": false
+      }
+    },
+    "900000999V": {
+      "actor": "OFFICER",
+      "officerType": "MINISTRY",
+      "officeId": "MIN-HOME",
+      "jurisdiction": {
+        "villages": [],
+        "divisions": [],
+        "districts": [],
+        "provinces": [],
+        "country": true
+      }
+    }
+  }
+}

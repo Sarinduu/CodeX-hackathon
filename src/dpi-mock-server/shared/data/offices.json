@@ -1,0 +1,84 @@
+{
+  "offices": {
+    "GN-001": {
+      "id": "GN-001",
+      "type": "GN_OFFICE",
+      "name": "Grama Niladhari Office - Udawela",
+      "division": "Kolonnawa",
+      "gnName": "K. Perera",
+      "signatureFileId": null
+    },
+    "GN-002": {
+      "id": "GN-002",
+      "type": "GN_OFFICE",
+      "name": "Grama Niladhari Office - Kottegoda",
+      "division": "Lakshapathiya",
+      "gnName": "T. Jayasinghe",
+      "signatureFileId": null
+    },
+    "GN-003": {
+      "id": "GN-003",
+      "type": "GN_OFFICE",
+      "name": "Grama Niladhari Office - Galewela",
+      "division": "Dambulla",
+      "gnName": "R. Fernando",
+      "signatureFileId": null
+    },
+    "DS-01": {
+      "id": "DS-01",
+      "type": "DIV_SECRET",
+      "name": "Divisional Secretariat - Kolonnawa",
+      "division": "Kolonnawa",
+      "headName": "S. Fernando",
+      "signatureFileId": null
+    },
+    "DS-DAM": {
+      "id": "DS-DAM",
+      "type": "DIV_SECRET",
+      "name": "Divisional Secretariat - Dambulla",
+      "division": "Dambulla",
+      "headName": "D. Herath",
+      "signatureFileId": null
+    },
+    "DIST-COLOMBO": {
+      "id": "DIST-COLOMBO",
+      "type": "DIST_SECRET",
+      "name": "District Secretariat - Colombo",
+      "division": "Colombo",
+      "headName": "R. Jayasuriya",
+      "signatureFileId": null
+    },
+    "DIST-MATALE": {
+      "id": "DIST-MATALE",
+      "type": "DIST_SECRET",
+      "name": "District Secretariat - Matale",
+      "division": "Matale",
+      "headName": "M. Abeykoon",
+      "signatureFileId": null
+    },
+    "PROV-WESTERN": {
+      "id": "PROV-WESTERN",
+      "type": "PROV_COUNCIL",
+      "name": "Provincial Council - Western",
+      "division": "Western",
+      "headName": "P. Senanayake",
+      "signatureFileId": null
+    },
+    "PROV-CENTRAL": {
+      "id": "PROV-CENTRAL",
+      "type": "PROV_COUNCIL",
+      "name": "Provincial Council - Central",
+      "division": "Central",
+      "headName": "T. Gunasekara",
+      "signatureFileId": null
+    },
+    "MIN-HOME": {
+      "id": "MIN-HOME",
+      "type": "MINISTRY",
+      "name": "Ministry of Home Affairs",
+      "division": "National",
+      "headName": "W. Abeysinghe",
+      "signatureFileId": null
+    }
+  }
+}

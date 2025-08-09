@@ -1,0 +1,31 @@
+{
+  "files": {
+    "4e30bddc-4fc2-421b-8af8-efd181b9175b": {
+      "id": "4e30bddc-4fc2-421b-8af8-efd181b9175b",
+      "filename": "1754738173829-classic car Large.jpeg",
+      "path": "/Users/sarindu/SLIIT/ReviveNation/CodeX-hackathon/src/dpi-mock-server/shared/uploads/1754738173829-classic car Large.jpeg",
+      "mime": "image/jpeg",
+      "size": 1093820,
+      "createdAt": 1754738173836,
+      "uploadedBy": "200012345678"
+    },
+    "e0fa8e3c-afd2-4079-9076-81f505fa0a6b": {
+      "id": "e0fa8e3c-afd2-4079-9076-81f505fa0a6b",
+      "filename": "1754739054995-IT21561566.pdf",
+      "path": "/Users/sarindu/SLIIT/ReviveNation/CodeX-hackathon/src/dpi-mock-server/shared/uploads/1754739054995-IT21561566.pdf",
+      "mime": "application/pdf",
+      "size": 1252916,
+      "createdAt": 1754739055003,
+      "uploadedBy": "200012345678"
+    },
+    "4b366044-92af-4b30-b86d-6d251c4b0226": {
+      "id": "4b366044-92af-4b30-b86d-6d251c4b0226",
+      "filename": "1754739118178-Image_Processing_Cheat_Sheet.pdf",
+      "path": "/Users/sarindu/SLIIT/ReviveNation/CodeX-hackathon/src/dpi-mock-server/shared/uploads/1754739118178-Image_Processing_Cheat_Sheet.pdf",
+      "mime": "application/pdf",
+      "size": 2756,
+      "createdAt": 1754739118182,
+      "uploadedBy": "200012345678"
+    }
+  }
+}
