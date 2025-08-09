@@ -1,7 +1,7 @@
 
-# NDX API Documentation – Data & Files Service
+# NDX API Documentation – Citizens, Officers, Signatures, and PDF Handling
 
-This service handles citizen and officer profiles, file uploads, process PDF versions, and signature management.
+This service handles **citizens**, **officers**, **signature uploads**, and **process document versioning** using **PDF files**.
 
 ---
 
@@ -12,359 +12,361 @@ http://localhost:4002
 
 ---
 
-## **1. POST /files/upload**
-Upload a file (PDF, image, etc.)
+## **1. GET /citizens/:nic**
+**Description**: Get the details of a citizen by NIC.
 
-**Request** (multipart)
-```json
-{
-  "file": "<file_to_upload>"
-}
+**Method**: `GET`
+
+**Request**:
+```
+GET /citizens/:nic
 ```
 
-**Response**
-```json
-{
-  "fileId": "1234-...",
-  "filename": "2023-02-01-abc.pdf",
-  "path": "/uploads/2023-02-01-abc.pdf",
-  "mime": "application/pdf",
-  "size": 25000,
-  "createdAt": 1633078400000,
-  "uploadedBy": "200012345678"
-}
-```
-
-**Status Codes**
-- `200 OK` – File uploaded successfully
-- `400 Bad Request` – Missing file or invalid file type
-
----
-
-## **2. GET /files/:id**
-Serve an uploaded file by its ID.
-
-**Example**
-```
-GET /files/1234-...
-```
-
-**Response** (raw file download)
-
-**Status Codes**
-- `200 OK` – File found and served
-- `404 Not Found` – File not found
-
----
-
-## **3. GET /citizens/:nic**
-Retrieve a citizen profile.
-
-**Example**
-```
-GET /citizens/200012345678
-```
-
-**Response**
+**Response**:
 ```json
 {
   "nic": "200012345678",
-  "name": "Test Citizen",
-  "dob": "2000-01-01",
-  "city": "Kandy",
+  "name": "John Doe",
+  "address": "123 Main St",
   "village": "Udawela",
-  "address": "No. 5, Main Rd",
-  "phone": "0771234567",
-  "email": "test.citizen@example.com",
-  "docs": ["1234-..."],
-  "signatureId": "abcd-..."
+  "division": "Kolonnawa",
+  "district": "Colombo",
+  "province": "Western",
+  "country": "Sri Lanka"
 }
 ```
 
-**Status Codes**
-- `200 OK` – Citizen profile found
-- `404 Not Found` – Citizen profile not found
-- `403 Forbidden` – Unauthorized access (not self or within officer's jurisdiction)
+**Status Codes**:
+- `200 OK` – Citizen details retrieved successfully
+- `404 Not Found` – Citizen not found
 
 ---
 
-## **4. PUT /citizens/:nic**
-Update a citizen profile (self or within officer's jurisdiction).
+## **2. GET /officers/:nic**
+**Description**: Get the details of an officer by NIC.
 
-**Request**
+**Method**: `GET`
+
+**Request**:
+```
+GET /officers/:nic
+```
+
+**Response**:
 ```json
 {
-  "name": "Updated Test Citizen",
-  "address": "No. 6, New Rd",
-  "phone": "0779999999",
-  "email": "updated.citizen@example.com",
-  "docs": ["1234-..."],
-  "signatureId": "abcd-..."
+  "nic": "901234567V",
+  "name": "K. Perera",
+  "position": "Grama Niladhari",
+  "officeId": "GN-001",
+  "jurisdiction": { "villages": ["Udawela"], "country": true }
 }
 ```
 
-**Response**
-```json
-{
-  "nic": "200012345678",
-  "name": "Updated Test Citizen",
-  "dob": "2000-01-01",
-  "city": "Kandy",
-  "village": "Udawela",
-  "address": "No. 6, New Rd",
-  "phone": "0779999999",
-  "email": "updated.citizen@example.com",
-  "docs": ["1234-..."],
-  "signatureId": "abcd-..."
-}
-```
-
-**Status Codes**
-- `200 OK` – Profile updated
-- `403 Forbidden` – Unauthorized access
-- `404 Not Found` – Citizen profile not found
+**Status Codes**:
+- `200 OK` – Officer details retrieved successfully
+- `404 Not Found` – Officer not found
 
 ---
 
-## **5. GET /officer/citizens**
-List citizens within the officer’s jurisdiction.
+## **3. GET /officers/:nic/citizens**
+**Description**: Get all citizens under an officer's jurisdiction.
 
-**Response**
+**Method**: `GET`
+
+**Request**:
+```
+GET /officers/:nic/citizens
+```
+
+**Response**:
 ```json
 {
   "count": 5,
   "citizens": [
     {
       "nic": "200012345678",
-      "name": "Test Citizen",
-      "dob": "2000-01-01",
-      "city": "Kandy",
+      "name": "John Doe",
+      "village": "Udawela"
+    },
+    {
+      "nic": "200012345679",
+      "name": "Jane Doe",
       "village": "Udawela"
     }
   ]
 }
 ```
 
-**Status Codes**
-- `200 OK` – Citizens found within jurisdiction
-- `403 Forbidden` – Officer not allowed to access citizens
-
----
-
-## **6. GET /officers/:nic**
-Retrieve an officer's profile.
-
-**Example**
-```
-GET /officers/901234567V
-```
-
-**Response**
-```json
-{
-  "nic": "901234567V",
-  "name": "K. Perera",
-  "type": "GN Officer",
-  "officeId": "GN-001",
-  "jurisdiction": { "villages": ["Udawela"] },
-  "signatureFileId": "file-1234-..."
-}
-```
-
-**Status Codes**
-- `200 OK` – Officer profile found
+**Status Codes**:
+- `200 OK` – List of citizens under the officer's jurisdiction
+- `403 Forbidden` – Only officers can access this data
 - `404 Not Found` – Officer not found
-- `403 Forbidden` – Unauthorized access
 
 ---
 
-## **7. POST /officers/:nic/signature**
-Assign a signature file to an officer.
+## **4. POST /officers/:nic/signature**
+**Description**: Add a signature for an officer (file upload).
 
-**Request**
-```json
+**Method**: `POST`
+
+**Request**:
+```
+POST /officers/:nic/signature
+Content-Type: multipart/form-data
 {
-  "fileId": "file-1234-..."
+  "file": "<file>"
 }
 ```
 
-**Response**
-```json
-{
-  "status": "success",
-  "message": "Signature assigned",
-  "officerNic": "901234567V",
-  "signatureFileId": "file-1234-...",
-  "url": "/files/1234-..."
-}
-```
-
-**Status Codes**
-- `200 OK` – Signature assigned
-- `400 Bad Request` – Missing or invalid fileId
-- `404 Not Found` – File not found
-
----
-
-## **8. GET /officers/:nic/signature**
-Retrieve officer's signature metadata.
-
-**Example**
-```
-GET /officers/901234567V/signature
-```
-
-**Response**
-```json
-{
-  "signatureFileId": "file-1234-...",
-  "url": "/files/1234-...",
-  "meta": {
-    "filename": "signature.png",
-    "mime": "image/png",
-    "size": 2048,
-    "uploadedAt": 1633078400000
-  }
-}
-```
-
-**Status Codes**
-- `200 OK` – Signature metadata found
-- `404 Not Found` – Signature not found
-
----
-
-## **9. POST /process-docs**
-Create a new document (e.g., PDF, form) related to a citizen.
-
-**Request**
-```json
-{
-  "citizenNic": "200012345678",
-  "processType": "BIRTH_CERT",
-  "referenceNo": "BC-2025-00123",
-  "fileId": "file-1234-...",
-  "note": "initial submission"
-}
-```
-
-**Response**
-```json
-{
-  "id": "doc-1234-...",
-  "citizenNic": "200012345678",
-  "processType": "BIRTH_CERT",
-  "referenceNo": "BC-2025-00123",
-  "createdAt": 1633078400000,
-  "createdBy": "901234567V",
-  "versions": [
-    { "v": 1, "fileId": "file-1234-...", "note": "initial submission", "ts": 1633078400000, "updatedBy": "901234567V" }
-  ]
-}
-```
-
-**Status Codes**
-- `200 OK` – Document created successfully
-- `400 Bad Request` – Missing required fields or invalid data
-
----
-
-## **10. PUT /process-docs/:docId/versions**
-Add a new version to an existing document.
-
-**Request**
-```json
-{
-  "fileId": "file-5678-...",
-  "note": "corrected spelling"
-}
-```
-
-**Response**
+**Response**:
 ```json
 {
   "ok": true,
-  "docId": "doc-1234-...",
-  "latestVersion": 2
+  "officerNic": "901234567V",
+  "signatureFileId": "file-123456",
+  "url": "/files/file-123456"
 }
 ```
 
-**Status Codes**
-- `200 OK` – Version added successfully
-- `400 Bad Request` – Missing required fields or invalid data
+**Status Codes**:
+- `200 OK` – Signature added successfully
+- `403 Forbidden` – Unauthorized access
+- `400 Bad Request` – Missing or invalid file
 
 ---
 
-## **11. GET /process-docs/:docId/latest**
-Get the latest version and associated file URL for a document.
+## **5. GET /officers/:nic/signature**
+**Description**: Get an officer's signature (file and metadata).
 
-**Response**
+**Method**: `GET`
+
+**Request**:
+```
+GET /officers/:nic/signature
+```
+
+**Response**:
 ```json
 {
-  "docId": "doc-1234-...",
-  "version": {
-    "v": 2,
-    "fileId": "file-5678-...",
-    "note": "corrected spelling",
-    "ts": 1633079500000,
-    "updatedBy": "901234567V"
-  },
-  "file": {
-    "id": "file-5678-...",
-    "filename": "birth_cert.pdf",
-    "url": "/files/5678-...",
-    "mime": "application/pdf",
-    "size": 30000
+  "signatureFileId": "file-123456",
+  "url": "/files/file-123456",
+  "meta": {
+    "filename": "signature.png",
+    "mime": "image/png",
+    "size": 1024,
+    "createdAt": "2025-07-31T10:00:00Z",
+    "uploadedBy": "admin"
   }
 }
 ```
 
-**Status Codes**
-- `200 OK` – Latest version and file URL returned
-- `404 Not Found` – Document not found
+**Status Codes**:
+- `200 OK` – Signature retrieved successfully
+- `404 Not Found` – Signature file missing or officer not found
 
 ---
 
-## **12. GET /citizens/:nic/process-docs**
-List all documents for a citizen.
+## **6. POST /process-docs**
+**Description**: Create or add a new version to a process document (PDF upload).
 
-**Example**
+**Method**: `POST`
+
+**Request**:
 ```
-GET /citizens/200012345678/process-docs
+POST /process-docs
+Content-Type: multipart/form-data
+{
+  "citizenNic": "200012345678",
+  "processType": "BIRTH_CERT",
+  "referenceNo": "ABC-123",
+  "note": "Initial submission",
+  "file": "<file>"
+}
 ```
 
-**Response**
+**Response**:
 ```json
 {
-  "count": 2,
-  "docs": [
+  "id": "doc-123456",
+  "citizenNic": "200012345678",
+  "processType": "BIRTH_CERT",
+  "referenceNo": "ABC-123",
+  "createdAt": "2025-07-31T10:00:00Z",
+  "versions": [
     {
-      "id": "doc-1234-...",
-      "citizenNic": "200012345678",
-      "processType": "BIRTH_CERT",
-      "referenceNo": "BC-2025-00123",
-      "versions": [
-        { "v": 1, "fileId": "file-1234-...", "note": "initial submission", "ts": 1633078400000, "updatedBy": "901234567V" }
-      ]
+      "v": 1,
+      "fileId": "file-123456",
+      "note": "Initial submission",
+      "ts": "2025-07-31T10:00:00Z",
+      "updatedBy": "admin"
     }
   ]
 }
 ```
 
-**Status Codes**
-- `200 OK` – Documents found for the citizen
+**Status Codes**:
+- `200 OK` – Document created successfully
+- `400 Bad Request` – Missing required fields or invalid data
+- `404 Not Found` – Citizen not found
+
+---
+
+## **7. PUT /process-docs/:docId/versions**
+**Description**: Add a new version to an existing process document.
+
+**Method**: `PUT`
+
+**Request**:
+```
+PUT /process-docs/:docId/versions
+Content-Type: multipart/form-data
+{
+  "fileId": "file-789012",
+  "note": "Corrected information",
+  "file": "<file>"
+}
+```
+
+**Response**:
+```json
+{
+  "ok": true,
+  "docId": "doc-123456",
+  "newVersion": {
+    "v": 2,
+    "fileId": "file-789012",
+    "note": "Corrected information",
+    "ts": "2025-07-31T10:30:00Z",
+    "updatedBy": "admin"
+  }
+}
+```
+
+**Status Codes**:
+- `200 OK` – Version added successfully
+- `400 Bad Request` – Missing required fields or invalid data
+- `404 Not Found` – Document or file not found
+
+---
+
+## **8. GET /process-docs/:docId**
+**Description**: Get the full metadata and version history of a process document.
+
+**Method**: `GET`
+
+**Request**:
+```
+GET /process-docs/:docId
+```
+
+**Response**:
+```json
+{
+  "id": "doc-123456",
+  "citizenNic": "200012345678",
+  "processType": "BIRTH_CERT",
+  "referenceNo": "ABC-123",
+  "createdAt": "2025-07-31T10:00:00Z",
+  "versions": [
+    {
+      "v": 1,
+      "fileId": "file-123456",
+      "note": "Initial submission",
+      "ts": "2025-07-31T10:00:00Z",
+      "updatedBy": "admin"
+    }
+  ]
+}
+```
+
+**Status Codes**:
+- `200 OK` – Document metadata and versions retrieved successfully
+- `404 Not Found` – Document not found
+
+---
+
+## **9. GET /process-docs/:docId/latest**
+**Description**: Get the latest version of a process document along with the file URL.
+
+**Method**: `GET`
+
+**Request**:
+```
+GET /process-docs/:docId/latest
+```
+
+**Response**:
+```json
+{
+  "docId": "doc-123456",
+  "version": {
+    "v": 2,
+    "fileId": "file-789012",
+    "note": "Corrected information",
+    "ts": "2025-07-31T10:30:00Z",
+    "updatedBy": "admin"
+  },
+  "file": {
+    "filename": "updated_document.pdf",
+    "mime": "application/pdf",
+    "size": 2048
+  },
+  "url": "/files/file-789012"
+}
+```
+
+**Status Codes**:
+- `200 OK` – Latest version retrieved successfully
+- `404 Not Found` – Document not found
+
+---
+
+## **10. GET /citizens/:nic/process-docs**
+**Description**: List all process documents associated with a citizen.
+
+**Method**: `GET`
+
+**Request**:
+```
+GET /citizens/:nic/process-docs
+```
+
+**Response**:
+```json
+{
+  "count": 2,
+  "docs": [
+    {
+      "id": "doc-123456",
+      "processType": "BIRTH_CERT",
+      "referenceNo": "ABC-123",
+      "createdAt": "2025-07-31T10:00:00Z"
+    },
+    {
+      "id": "doc-654321",
+      "processType": "GRANT",
+      "referenceNo": "XYZ-987",
+      "createdAt": "2025-07-31T10:30:00Z"
+    }
+  ]
+}
+```
+
+**Status Codes**:
+- `200 OK` – Documents listed successfully
 - `404 Not Found` – Citizen not found
 
 ---
 
 ## Notes
-- **CITIZEN** can only access their own documents and profile.
-- **OFFICER** can access documents and profiles within their jurisdiction (GN, DIVSEC, DISTSEC, PROVINCIAL, MINISTRY).
-- The **JWT** contains claims for determining scope of access for officers.
-- File uploads are handled by **`/files/upload`** endpoint and returned metadata is used in documents.
+- **CITIZEN**: Can create and view their own process documents.
+- **OFFICER**: Can view and update documents for citizens within their jurisdiction.
+- **Document Versions**: Documents can have multiple versions, and each version is associated with a file and update details.
 
 ---
 
 # Conclusion
-The NDX API provides services for **citizens**, **officers**, and **files**. Officers can view and manage documents for citizens within their jurisdiction, while citizens can manage their own documents and profiles.
+
+The NDX API facilitates **citizen** and **officer** management, including signature uploads and **process document versioning**. Citizens can upload, modify, and view process documents, while officers can authenticate and manage citizens' documents based on their jurisdiction.
 
