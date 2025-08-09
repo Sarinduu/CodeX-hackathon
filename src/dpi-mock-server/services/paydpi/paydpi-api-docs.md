@@ -1,372 +1,178 @@
 
-# NDX API Documentation – Citizens, Officers, Signatures, and PDF Handling
+# PayDPI API Documentation – Mock Payment Gateway
 
-This service handles **citizens**, **officers**, **signature uploads**, and **process document versioning** using **PDF files**.
+This service handles **payment intents** and **payment confirmations** for **citizens** and **officers** using simple API interactions.
 
 ---
 
 ## 📂 Base URL
 ```
-http://localhost:4002
+http://localhost:4003
 ```
 
 ---
 
-## **1. GET /citizens/:nic**
-**Description**: Get the details of a citizen by NIC.
+## **1. GET /health**
+**Description**: Check the health of the PayDPI service.
 
 **Method**: `GET`
 
 **Request**:
 ```
-GET /citizens/:nic
-```
-
-**Response**:
-```json
-{
-  "nic": "200012345678",
-  "name": "John Doe",
-  "address": "123 Main St",
-  "village": "Udawela",
-  "division": "Kolonnawa",
-  "district": "Colombo",
-  "province": "Western",
-  "country": "Sri Lanka"
-}
-```
-
-**Status Codes**:
-- `200 OK` – Citizen details retrieved successfully
-- `404 Not Found` – Citizen not found
-
----
-
-## **2. GET /officers/:nic**
-**Description**: Get the details of an officer by NIC.
-
-**Method**: `GET`
-
-**Request**:
-```
-GET /officers/:nic
-```
-
-**Response**:
-```json
-{
-  "nic": "901234567V",
-  "name": "K. Perera",
-  "position": "Grama Niladhari",
-  "officeId": "GN-001",
-  "jurisdiction": { "villages": ["Udawela"], "country": true }
-}
-```
-
-**Status Codes**:
-- `200 OK` – Officer details retrieved successfully
-- `404 Not Found` – Officer not found
-
----
-
-## **3. GET /officers/:nic/citizens**
-**Description**: Get all citizens under an officer's jurisdiction.
-
-**Method**: `GET`
-
-**Request**:
-```
-GET /officers/:nic/citizens
-```
-
-**Response**:
-```json
-{
-  "count": 5,
-  "citizens": [
-    {
-      "nic": "200012345678",
-      "name": "John Doe",
-      "village": "Udawela"
-    },
-    {
-      "nic": "200012345679",
-      "name": "Jane Doe",
-      "village": "Udawela"
-    }
-  ]
-}
-```
-
-**Status Codes**:
-- `200 OK` – List of citizens under the officer's jurisdiction
-- `403 Forbidden` – Only officers can access this data
-- `404 Not Found` – Officer not found
-
----
-
-## **4. POST /officers/:nic/signature**
-**Description**: Add a signature for an officer (file upload).
-
-**Method**: `POST`
-
-**Request**:
-```
-POST /officers/:nic/signature
-Content-Type: multipart/form-data
-{
-  "file": "<file>"
-}
+GET /health
 ```
 
 **Response**:
 ```json
 {
   "ok": true,
-  "officerNic": "901234567V",
-  "signatureFileId": "file-123456",
-  "url": "/files/file-123456"
+  "service": "PayDPI",
+  "time": 1618554674000
 }
 ```
 
 **Status Codes**:
-- `200 OK` – Signature added successfully
-- `403 Forbidden` – Unauthorized access
-- `400 Bad Request` – Missing or invalid file
+- `200 OK` – Health check successful
 
 ---
 
-## **5. GET /officers/:nic/signature**
-**Description**: Get an officer's signature (file and metadata).
-
-**Method**: `GET`
-
-**Request**:
-```
-GET /officers/:nic/signature
-```
-
-**Response**:
-```json
-{
-  "signatureFileId": "file-123456",
-  "url": "/files/file-123456",
-  "meta": {
-    "filename": "signature.png",
-    "mime": "image/png",
-    "size": 1024,
-    "createdAt": "2025-07-31T10:00:00Z",
-    "uploadedBy": "admin"
-  }
-}
-```
-
-**Status Codes**:
-- `200 OK` – Signature retrieved successfully
-- `404 Not Found` – Signature file missing or officer not found
-
----
-
-## **6. POST /process-docs**
-**Description**: Create or add a new version to a process document (PDF upload).
+## **2. POST /payments/intents**
+**Description**: Create a new payment intent.
 
 **Method**: `POST`
 
 **Request**:
-```
-POST /process-docs
-Content-Type: multipart/form-data
+```json
 {
-  "citizenNic": "200012345678",
-  "processType": "BIRTH_CERT",
-  "referenceNo": "ABC-123",
-  "note": "Initial submission",
-  "file": "<file>"
+  "amount": 100.50,
+  "currency": "LKR",
+  "reference": "REF-12345",
+  "payerNic": "200012345678"
 }
 ```
 
 **Response**:
 ```json
 {
-  "id": "doc-123456",
-  "citizenNic": "200012345678",
-  "processType": "BIRTH_CERT",
-  "referenceNo": "ABC-123",
-  "createdAt": "2025-07-31T10:00:00Z",
-  "versions": [
-    {
-      "v": 1,
-      "fileId": "file-123456",
-      "note": "Initial submission",
-      "ts": "2025-07-31T10:00:00Z",
-      "updatedBy": "admin"
-    }
-  ]
+  "paymentId": "b6d8f033-...",
+  "status": "REQUIRES_CONFIRMATION",
+  "reference": "REF-12345",
+  "expiresAt": 1618558274000
 }
 ```
 
 **Status Codes**:
-- `200 OK` – Document created successfully
-- `400 Bad Request` – Missing required fields or invalid data
-- `404 Not Found` – Citizen not found
+- `200 OK` – Payment intent created successfully
+- `400 Bad Request` – Missing required fields (`amount`, `payerNic`)
 
 ---
 
-## **7. PUT /process-docs/:docId/versions**
-**Description**: Add a new version to an existing process document.
+## **3. POST /payments/confirm**
+**Description**: Confirm (authorize and capture) a payment.
 
-**Method**: `PUT`
+**Method**: `POST`
 
 **Request**:
-```
-PUT /process-docs/:docId/versions
-Content-Type: multipart/form-data
+```json
 {
-  "fileId": "file-789012",
-  "note": "Corrected information",
-  "file": "<file>"
+  "paymentId": "b6d8f033-...",
+  "result": "SUCCESS"
 }
 ```
 
 **Response**:
 ```json
 {
-  "ok": true,
-  "docId": "doc-123456",
-  "newVersion": {
-    "v": 2,
-    "fileId": "file-789012",
-    "note": "Corrected information",
-    "ts": "2025-07-31T10:30:00Z",
-    "updatedBy": "admin"
-  }
+  "paymentId": "b6d8f033-...",
+  "status": "SUCCEEDED",
+  "reference": "REF-12345"
 }
 ```
 
 **Status Codes**:
-- `200 OK` – Version added successfully
-- `400 Bad Request` – Missing required fields or invalid data
-- `404 Not Found` – Document or file not found
+- `200 OK` – Payment successfully confirmed
+- `400 Bad Request` – Missing `paymentId` or invalid data
+- `404 Not Found` – Payment not found
+- `401 Unauthorized` – Invalid/expired JWT token
 
 ---
 
-## **8. GET /process-docs/:docId**
-**Description**: Get the full metadata and version history of a process document.
+## **4. GET /payments/:id**
+**Description**: Get details of a specific payment by ID.
 
 **Method**: `GET`
 
 **Request**:
 ```
-GET /process-docs/:docId
+GET /payments/b6d8f033-...
 ```
 
 **Response**:
 ```json
 {
-  "id": "doc-123456",
-  "citizenNic": "200012345678",
-  "processType": "BIRTH_CERT",
-  "referenceNo": "ABC-123",
-  "createdAt": "2025-07-31T10:00:00Z",
-  "versions": [
-    {
-      "v": 1,
-      "fileId": "file-123456",
-      "note": "Initial submission",
-      "ts": "2025-07-31T10:00:00Z",
-      "updatedBy": "admin"
-    }
-  ]
+  "paymentId": "b6d8f033-...",
+  "status": "SUCCEEDED",
+  "payerNic": "200012345678",
+  "amount": 100.50,
+  "currency": "LKR",
+  "reference": "REF-12345",
+  "createdAt": 1618554674000
 }
 ```
 
 **Status Codes**:
-- `200 OK` – Document metadata and versions retrieved successfully
-- `404 Not Found` – Document not found
+- `200 OK` – Payment details retrieved successfully
+- `404 Not Found` – Payment not found
 
 ---
 
-## **9. GET /process-docs/:docId/latest**
-**Description**: Get the latest version of a process document along with the file URL.
+## **5. GET /payments**
+**Description**: List payments by reference, payer NIC, or status.
 
 **Method**: `GET`
 
 **Request**:
 ```
-GET /process-docs/:docId/latest
-```
-
-**Response**:
-```json
-{
-  "docId": "doc-123456",
-  "version": {
-    "v": 2,
-    "fileId": "file-789012",
-    "note": "Corrected information",
-    "ts": "2025-07-31T10:30:00Z",
-    "updatedBy": "admin"
-  },
-  "file": {
-    "filename": "updated_document.pdf",
-    "mime": "application/pdf",
-    "size": 2048
-  },
-  "url": "/files/file-789012"
-}
-```
-
-**Status Codes**:
-- `200 OK` – Latest version retrieved successfully
-- `404 Not Found` – Document not found
-
----
-
-## **10. GET /citizens/:nic/process-docs**
-**Description**: List all process documents associated with a citizen.
-
-**Method**: `GET`
-
-**Request**:
-```
-GET /citizens/:nic/process-docs
+GET /payments?reference=REF-12345&status=SUCCEEDED
 ```
 
 **Response**:
 ```json
 {
   "count": 2,
-  "docs": [
+  "items": [
     {
-      "id": "doc-123456",
-      "processType": "BIRTH_CERT",
-      "referenceNo": "ABC-123",
-      "createdAt": "2025-07-31T10:00:00Z"
+      "paymentId": "b6d8f033-...",
+      "status": "SUCCEEDED",
+      "amount": 100.50,
+      "currency": "LKR",
+      "reference": "REF-12345"
     },
     {
-      "id": "doc-654321",
-      "processType": "GRANT",
-      "referenceNo": "XYZ-987",
-      "createdAt": "2025-07-31T10:30:00Z"
+      "paymentId": "c7d9f033-...",
+      "status": "SUCCEEDED",
+      "amount": 50.00,
+      "currency": "LKR",
+      "reference": "REF-67890"
     }
   ]
 }
 ```
 
 **Status Codes**:
-- `200 OK` – Documents listed successfully
-- `404 Not Found` – Citizen not found
+- `200 OK` – List of payments retrieved successfully
 
 ---
 
 ## Notes
-- **CITIZEN**: Can create and view their own process documents.
-- **OFFICER**: Can view and update documents for citizens within their jurisdiction.
-- **Document Versions**: Documents can have multiple versions, and each version is associated with a file and update details.
+- **CITIZEN**: Can create and view payments for themselves.
+- **OFFICER**: Can create and view payments for any citizen.
+- **Idempotency**: Payments are idempotent, using the header `Idempotency-Key` to ensure that repeated requests do not create duplicate intents or transactions.
+- **Webhooks**: PayDPI supports webhook events for payment status updates.
 
 ---
 
 # Conclusion
 
-The NDX API facilitates **citizen** and **officer** management, including signature uploads and **process document versioning**. Citizens can upload, modify, and view process documents, while officers can authenticate and manage citizens' documents based on their jurisdiction.
+The PayDPI API facilitates payment intent creation, confirmation, and management using a simple payment gateway system. It supports creating and confirming payments, as well as listing and retrieving payment details. The service is protected by **JWT authentication** and supports **idempotency** and **webhooks**.
 
